@@ -1,6 +1,8 @@
 from random import*
 game = False
 money = 10
+xp = 100
+
 
 while True:
     cas = input("вы хотите поехать в козино? (да/нет) ")
@@ -41,4 +43,20 @@ while True:
     else:
         print("вы не хотите войти в козино")
         break
+
+
+
+battle = input("вы хотите поучавствовать в сражении за деньги? (да/нет) ")
+while True:
+    if battle == "да":
+        your_attack == randint(1, 10)
+        enemy_attack == randint(1, 10)
+        print()
+        print()
+    elif battle == "нет":
+        print("вы решили не учавствовать в сражении")
+        break
+    else:
+        print("вы совершили опечатку")
+    
 
