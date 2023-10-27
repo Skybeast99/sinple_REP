@@ -1,5 +1,0 @@
-rows = int(input'введите число рядов')
-current_row = 1
-while current_row <= rows:
-    print('1' * current_row)
-    current_row += 1
