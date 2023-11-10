@@ -1,17 +1,21 @@
 import turtle
 
+turtle.speed(0)
+
+
 def draw_house(
     x=0,
     y=0,
     base_w=100,
-    base_h=100,
-    base_c='blue',
+    base_h=5,
+    base_c='gray',
     wall_w=100,
     wall_h=60,
-    wall_c='blue',
+    wall_c='red',
     roof_w=100,
-    roof_h=10, 
-    roof_c='blue'):
+    roof_h=100, 
+    roof_c='blue'
+    ):
     '''
     вызывает функцию рисования фундамента
     вызывает функцию рисования стен
@@ -33,22 +37,49 @@ def draw_house(
     roof_c - цвет крыши
     '''
     print('начинаем стоить дом')
-    draw_base(12, 70, 'blue', 1, 1)
-    draw_wall()
-    draw_roof()
+    draw_base(x, y, base_w, base_h, base_c)
+    draw_wall(x, y, wall_w, wall_h, wall_c, base_h)
+    draw_roof(x, y, roof_w, roof_h, roof_c, base_h, wall_h, wall_w)
+    turtle.penup()
+    turtle.goto(x, y)
 
-def draw_base(width, height, color, x, y):
+
+
+def draw_base(x, y, width, height, color):
     '''рисует фундамент'''
-    print('рисует фундамент')
-
     turtle.penup()
     turtle.goto(x, y)
     turtle.pendown()
     draw_rectangle(width, height, color)
 
+
+def draw_wall(x, y, width, height, color, base_h):
+    '''рисует стены'''
+    turtle.penup()
+    turtle.goto(x, y + base_h)
+    turtle.pendown()
+    draw_rectangle(width, height, color)
+
+
+def draw_roof(x, y, width, height, color, wall_h, base_h, wall_w):
+    '''рисует крышу'''
+    turtle.penup()
+    roof_y = y + base_h + wall_h
+    turtle.goto(x, roof_y)
+    turtle.pendown()
+    turtle.fillcolor(color)
+    turtle.begin_fill()
+    x_top = wall_w // 2
+    y_top = y + height + wall_h
+    turtle.goto(x_top, y_top)
+    turtle.goto(x_top + wall_w // 2, roof_y)
+    turtle.goto(x, roof_y)
+    turtle.end_fill()
+
+
 def  draw_rectangle(width, height, color):
     turtle.fillcolor(color)
-    turtle.begin_fill(color)
+    turtle.begin_fill()
     turtle.fd(width)
     turtle.lt(90)   
     turtle.fd(height)
@@ -57,16 +88,9 @@ def  draw_rectangle(width, height, color):
     turtle.lt(90)
     turtle.fd(height)
     turtle.lt(90)
-    turtle.end_fill(color)
+    turtle.end_fill()
 
 
-def draw_wall(wall_w, wall_h, wall_c):
-    '''рисует стены'''
-    print('рисует стены')
-
-def draw_roof(roof_w, roof_h, roof_c):
-    '''рисует крышу'''
-    print('рисует крышу')
+draw_house()
 
 turtle.done()
-draw_house()
