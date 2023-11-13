@@ -8,13 +8,13 @@ def draw_house(
     y=0,
     base_w=100,
     base_h=5,
-    base_c='gray',
+    base_c='green',
     wall_w=100,
     wall_h=60,
-    wall_c='red',
+    wall_c='blue',
     roof_w=100,
     roof_h=100, 
-    roof_c='blue'
+    roof_c='red'
     ):
     '''
     вызывает функцию рисования фундамента
@@ -40,9 +40,6 @@ def draw_house(
     draw_base(x, y, base_w, base_h, base_c)
     draw_wall(x, y, wall_w, wall_h, wall_c, base_h)
     draw_roof(x, y, roof_w, roof_h, roof_c, base_h, wall_h, wall_w)
-    turtle.penup()
-    turtle.goto(x, y)
-
 
 
 def draw_base(x, y, width, height, color):
@@ -69,7 +66,7 @@ def draw_roof(x, y, width, height, color, wall_h, base_h, wall_w):
     turtle.pendown()
     turtle.fillcolor(color)
     turtle.begin_fill()
-    x_top = wall_w // 2
+    x_top = x + wall_w // 2
     y_top = y + height + wall_h
     turtle.goto(x_top, y_top)
     turtle.goto(x_top + wall_w // 2, roof_y)
@@ -92,5 +89,11 @@ def  draw_rectangle(width, height, color):
 
 
 draw_house()
+draw_house(x=50, y=130, base_c='green', wall_c='purple', roof_c='brown')
+draw_house(x=70, y=-140, base_c='orange', wall_c='pink', roof_c='yellow')
+draw_house(x=-198, y=5, base_c='grey', wall_c='black', roof_c='white')
+draw_house(x=-88, y=-100)
+draw_house(x=199, y=-19)
+draw_house(x=-250, y=-176)
 
 turtle.done()
