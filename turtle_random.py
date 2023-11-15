@@ -1,5 +1,5 @@
 import turtle
-import rundom
+import random
 
 turtle.speed(0)
 
@@ -17,7 +17,7 @@ def draw_house(
     door_h=30, 
     door_c='yellow', 
     roof_w=100,
-    roof_h=100, 
+    roof_h=50, 
     roof_c='red'
     ):
     '''
@@ -82,7 +82,7 @@ def draw_roof(x, y, width, height, color, wall_h, base_h, wall_w):
     turtle.fillcolor(color)
     turtle.begin_fill()
     x_top = x + wall_w // 2
-    y_top = y + height + wall_h
+    y_top = y + height + wall_h + base_h
     turtle.goto(x_top, y_top)
     turtle.goto(x_top + width // 2, roof_y)
     turtle.goto(x, roof_y)
@@ -103,24 +103,24 @@ def  draw_rectangle(width, height, color):
     turtle.end_fill()
 
 
-draw_house(roof_w=200, wall_w=200, base_w=200)
-draw_house(x=50, y=130, base_c='green', wall_c='purple', roof_c='brown')
-draw_house(x=70, y=-140, base_c='orange', wall_c='pink', roof_c='yellow')
+draw_house(x=-100, y=-100, roof_w=200, wall_w=200, base_w=200)
+draw_house(x=50, y=-230, base_c='green', wall_c='purple', roof_c='brown')
+draw_house(x=-250, y=-140, base_c='orange', wall_c='pink', roof_c='yellow')
 draw_house(x=-198, y=5, base_c='grey', wall_c='black', roof_c='white')
 draw_house(
-    x=randint(),
-    y=randint(),
-    base_w=randint(50, 100),
-    base_h=randint(),
+    x=random.randint(1, 99),
+    y=random.randint(1, 99),
+    base_w=random.randint(50, 100),
+    base_h=random.randint(50, 100),
     base_c='green',
-    wall_w=randint(50, 100),
-    wall_h=randint(),
+    wall_w=random.randint(50, 100),
+    wall_h=random.randint(50, 100),
     wall_c='blue',
-    door_w=randint(1, 50), 
-    door_h=randint(), 
+    door_w=random.randint(1, 50), 
+    door_h=random.randint(10, 60), 
     door_c='yellow', 
-    roof_w=randint(),
-    roof_h=randint(), 
+    roof_w=random.randint(50, 100),
+    roof_h=random.randint(61, 100), 
     roof_c='red')
 
 turtle.done()
