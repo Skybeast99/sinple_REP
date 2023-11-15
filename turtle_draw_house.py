@@ -82,7 +82,7 @@ def draw_roof(x, y, width, height, color, wall_h, base_h, wall_w):
     turtle.fillcolor(color)
     turtle.begin_fill()
     x_top = x + wall_w // 2
-    y_top = y + height + wall_h
+    y_top = y + height + wall_h + base_h
     turtle.goto(x_top, y_top)
     turtle.goto(x_top + width // 2, roof_y)
     turtle.goto(x, roof_y)
