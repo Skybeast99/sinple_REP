@@ -116,7 +116,7 @@ while n < num_house:
     wall_w=random.randint(50, 100),
     wall_h=random.randint(50, 100),
     wall_c='blue',
-    door_w=random.randint(1, 50), 
+    door_w=random.randint(5, 50), 
     door_h=random.randint(10, 60), 
     door_c='yellow', 
     roof_w=random.randint(50, 100),
