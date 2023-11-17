@@ -107,20 +107,24 @@ def  draw_rectangle(width, height, color):
     turtle.end_fill()
 
 while n < num_house:
+    width = random.randint(50, 100)
+    height = random.randint(50, 100)
+    color = ['green', 'blue', 'black', 'orange', 'red', 'yellow']
+
     draw_house(
     x=x_house,
     y=0,
-    base_w=random.randint(50, 100),
-    base_h=random.randint(5, 50),
+    base_w=width,
+    base_h=random.randint(height // 100 * 10, height // 10 * 20),
     base_c='green',
-    wall_w=random.randint(50, 100),
+    wall_w=random.randint(50, width),
     wall_h=random.randint(50, 100),
     wall_c='blue',
-    door_w=random.randint(5, 50), 
-    door_h=random.randint(10, 60), 
+    door_w=(width // 100 * 20, width // 100 * 30), 
+    door_h=random.randint(height //100 * 20, height // 100 * 40), 
     door_c='yellow', 
-    roof_w=random.randint(50, 100),
-    roof_h=random.randint(61, 100), 
+    roof_w=random.randint(width, width // 100 * 120),
+    roof_h=random.randint(height // 100 * 25, height // 100 * 75), 
     roof_c='red')
     n += 1
     x_house += 101
