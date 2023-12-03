@@ -46,7 +46,7 @@ def visit_rock(player_name, player_hp, player_money, player_ex, player_level, pl
     elif option == '0':
         print('ВЫШЕЛ ИЗ ИГРЫ')
     else:
-        visit_rock(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion_1)
+        visit_rock(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
 
 
 def show_hero(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1):
@@ -69,6 +69,8 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
         print('e - использовать зелье силы')
         print('r - убежать с поля боя')
         while True:
+            print('ваши зелья здоровья: ', player_potion)
+            print('ваши зелья силы: ', player_potion_1)
             decision = input('ВЫБИРИТЕ ДЕЙСТВИЕ ')
             if decision == 'w' and player_hp > 0 and enemy_hp > 0:
                 your_attack = random.randint(1, player_strength)
@@ -84,7 +86,7 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
                     print('У ВАС НЕТ ЗЕЛЕЙ ЗДОРОВЬЯ')
                 else:
                     print('вы использовали зелье ЗДОРОВЬЯ')
-                    if player_hp < 100:
+                    if player_hp <= 100:
                         player_hp += 150
                         player_potion -= 1
                         enemy_attack = random.randint(1, enemy_strength)
@@ -93,7 +95,8 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
                         print('ваше здоровье:', player_hp)
                         print('здоровье врага:', enemy_hp)
                     else:
-                        player_hp == 250
+                        damage = 250 - player_hp
+                        player_hp += damage
                         player_potion -= 1
                         enemy_attack = random.randint(1, enemy_strength)
                         print('атака врага:', enemy_attack)
@@ -115,8 +118,8 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
             elif decision == 'r' and player_hp > 0 and enemy_hp > 0:
                 print('вы убежали ')
                 visit_rock(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
-            elif player_hp <= 0:
-                print('вы умерли')
+            elif player_hp <= 0:    
+                print('ВЫ УМЕРЛИ')
             elif enemy_hp <= 0:
                 player_ex += 20
                 player_money += 15
@@ -211,4 +214,4 @@ def visit_lavka(player_name, player_hp, player_money, player_ex, player_level, p
         visit_lavka(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
     os.system('cls') 
 
-start_game(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)     
+start_game(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1) 
