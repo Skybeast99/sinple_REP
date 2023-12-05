@@ -5,7 +5,7 @@ import random
 def pause ():
     print(input)
 
-player_name = 1 
+player_name = 'пипяо'
 game = False
 player_hp = 250
 player_strength = 100
@@ -14,7 +14,7 @@ player_ex = 1
 player_level = 1
 player_potion = 0
 player_potion_1 = 0
-
+healpoint = 250
 
 def start_game(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1):
     player_name = input('~ВВЕДИТЕ ВАШЕ ИМЯ~: ')
@@ -30,7 +30,7 @@ def start_game(player_name, player_hp, player_money, player_ex, player_level, pl
 
 def visit_rock(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1):
     os.system('cls')
-    show_hero(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1) 
+    show_hero(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1, healpoint) 
     print(player_name, '~ПРИЕХАЛ К КАМНЮ~')
     print('1 - поехать на арену')
     print('2 - отправиться в таверну')
@@ -49,19 +49,38 @@ def visit_rock(player_name, player_hp, player_money, player_ex, player_level, pl
         visit_rock(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
 
 
-def show_hero(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1):
-    print('ваше здоровье: ', player_hp)
-    print('ваша сила: ', player_strength)
-    print('ваши деньги: ', player_money)
-    print('ваш опыт: ', player_ex)
-    print('ваш левл: ', player_level)
-    print('ваши зелья здоровья: ', player_potion)
-    print('ваши зелья силы: ', player_potion_1)
+def show_hero(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1, healpoint):
+    if player_ex < player_level * 100:
+        print('ваше здоровье: ', player_hp)
+        print('ваша сила: ', player_strength)
+        print('ваши деньги: ', player_money)
+        print('ваш опыт: ', player_ex)
+        print('ваш левл: ', player_level)
+        print('ваши зелья здоровья: ', player_potion)
+        print('ваши зелья силы: ', player_potion_1)
+    else:
+        player_level += 1 
+        player_strength += 10
+        healpoint += 25
+        player_hp += 25
+        print('ВАШ ЛЕВЛ ПОВЫШЕН')
+        print('ВАШ УРОН И УРОВЕНЬ МАКСИМАЛЬНОГО ЗДОРОВЬЯ ПОВЫШЕН')
+        print('ваше здоровье: ', player_hp)
+        print('ваша сила: ', player_strength)
+        print('ваши деньги: ', player_money)
+        print('ваш опыт: ', player_ex)
+        print('ваш левл: ', player_level)
+        print('ваши зелья здоровья: ', player_potion)
+        print('ваши зелья силы: ', player_potion_1)
+    return player_level
+
 
 def visit_battle(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1):
     battle = input("вы хотите поучавствовать в сражении за деньги? (y/n) ")
     enemy_hp = 100
     enemy_strength = 100
+    enemy_xp = 0
+    enemy_level = 1
     if battle == 'y':
         print('вы повстречали врага ')
         print('w - ударить')
@@ -95,7 +114,7 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
                         print('ваше здоровье:', player_hp)
                         print('здоровье врага:', enemy_hp)
                     else:
-                        damage = 250 - player_hp
+                        damage = healpoint - player_hp
                         player_hp += damage
                         player_potion -= 1
                         enemy_attack = random.randint(1, enemy_strength)
@@ -135,7 +154,7 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
                 enemy_hp -= your_attack
                 print('ваше здоровье:', player_hp)
                 print('здоровье врага:', enemy_hp)
-    elif battle =='n':
+    elif battle == 'n':
         visit_rock(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
     else:  
         print('опечатка')
@@ -149,7 +168,14 @@ def visit_tavern(player_name, player_hp, player_money, player_ex, player_level, 
         bot = random.randint(2, 12)
         num = random.randint(2, 12)
         print('ваши деньги:', player_money)
-        bet = int(input('ВВЕДИТЕ ВАШУ СТАВКУ: '))
+        bet = input('ВВЕДИТЕ ВАШУ СТАВКУ: ')
+
+        try:
+            bet = int(bet)
+        except ValueError:
+            print('У ВАС ОШИБКА!!!')
+            visit_tavern(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
+
         if player_money >= 1:
             print("ваше число", num)
             print("число бота", bot)
