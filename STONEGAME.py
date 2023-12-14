@@ -58,11 +58,11 @@ def show_hero(player_name, player_hp, player_money, player_ex, player_level, pla
         print('ваш левл: ', player_level)
         print('ваши зелья здоровья: ', player_potion)
         print('ваши зелья силы: ', player_potion_1)
+        print(healpoint)
     else:
         player_level += 1 
         player_strength += 10
         healpoint += 25
-        player_hp += 25
         print('ВАШ ЛЕВЛ ПОВЫШЕН')
         print('ВАШ УРОН И УРОВЕНЬ МАКСИМАЛЬНОГО ЗДОРОВЬЯ ПОВЫШЕН')
         print('ваше здоровье: ', player_hp)
@@ -72,6 +72,7 @@ def show_hero(player_name, player_hp, player_money, player_ex, player_level, pla
         print('ваш левл: ', player_level)
         print('ваши зелья здоровья: ', player_potion)
         print('ваши зелья силы: ', player_potion_1)
+        print(healpoint)
     return player_level
 
 
@@ -105,7 +106,7 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
                     print('У ВАС НЕТ ЗЕЛЕЙ ЗДОРОВЬЯ')
                 else:
                     print('вы использовали зелье ЗДОРОВЬЯ')
-                    if player_hp <= 100:
+                    if player_hp <= healpoint - 150:
                         player_hp += 150
                         player_potion -= 1
                         enemy_attack = random.randint(1, enemy_strength)
@@ -114,8 +115,8 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
                         print('ваше здоровье:', player_hp)
                         print('здоровье врага:', enemy_hp)
                     else:
-                        damage = healpoint - player_hp
-                        player_hp += damage
+                        damage = healpoint - player_hp                    
+                        player_hp += damage 
                         player_potion -= 1
                         enemy_attack = random.randint(1, enemy_strength)
                         print('атака врага:', enemy_attack)
@@ -140,9 +141,10 @@ def visit_battle(player_name, player_hp, player_money, player_ex, player_level, 
             elif player_hp <= 0:    
                 print('ВЫ УМЕРЛИ')
             elif enemy_hp <= 0:
-                player_ex += 20
+                player_ex += 100
                 player_money += 15
                 print('вы победили врага и получили 15 МОНЕТ и 20 ОПЫТА')
+                input('НАЖМИТЕ ENTER чтобы продолжить')
                 visit_rock(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
             else:
                 print('у вас опечатка')
@@ -206,7 +208,7 @@ def visit_tavern(player_name, player_hp, player_money, player_ex, player_level, 
 def visit_lavka(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1):
     print('q - купить зелье здоровья (15 монет)')
     print('e - купить зелье силы (10 монет)')
-    print('r - купить зелье опыта (15 монет)')
+    print('r - купить зелье опыта (10 монет)')
     print('w - выйти')
     potion_prize_h = 15
     potion_prize_s = 10
@@ -215,7 +217,7 @@ def visit_lavka(player_name, player_hp, player_money, player_ex, player_level, p
         if player_money < potion_prize_h:
             print(f'У {player_name} НЕДОСТАТОЧНО ДЕНЕГ')
         else:
-            player_money -= potion_prize_s
+            player_money -= potion_prize_h
             player_potion += 1
         pause()
         visit_lavka(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)    
@@ -240,4 +242,4 @@ def visit_lavka(player_name, player_hp, player_money, player_ex, player_level, p
         visit_lavka(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)
     os.system('cls') 
 
-start_game(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1) 
+start_game(player_name, player_hp, player_money, player_ex, player_level, player_strength, player_potion, player_potion_1)  
