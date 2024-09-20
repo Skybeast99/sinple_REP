@@ -45,13 +45,13 @@ class Maze:
         self.bulldozer_col = choice(range(2, self.cols, 2))
         self.map[self.bulldozer_row][self.bulldozer_col] = EMPTY
 
-        while not self.is_ready:
+        while self.is_ready == False:
             all_directions = []
             if self.bulldozer_col < self.cols - 2:
                 all_directions.append('right')
             if self.bulldozer_col > 0:
                 all_directions.append('left')
-            if self.bulldozer_row < 0:
+            if self.bulldozer_row > 0:
                 all_directions.append('up')
             if self.bulldozer_row < self.rows - 2:
                 all_directions.append('down')
@@ -84,14 +84,13 @@ class Maze:
                     self.map[self.bulldozer_row + 1][self.bulldozer_col] = EMPTY
                     self.map[self.bulldozer_row + 2][self.bulldozer_col] = EMPTY
                 self.bulldozer_row += 2
-            break
             
-
+            
             self.check_path()
 
 
 
-maze = Maze(5, 31)
+maze = Maze(20, 40)
 maze.make_path()
 maze.make_borders()
 maze.make_exit()
